@@ -27,9 +27,11 @@ y_velocity = 0
 game_over = False
 
 score = 0
+last_score_update_time = py.time.get_ticks()
 font = py.font.SysFont("arial", 25)
 
 while True:
+    current_time = py.time.get_ticks()
     for event in py.event.get():
         if event.type == py.QUIT:
             py.quit()
@@ -49,10 +51,13 @@ while True:
                 obs_rect.x = 800
                 obs_rect.x = rd.randint(400,1200)
                 score = 0
+                last_score_update_time = py.time.get_ticks()
 
 
     if not game_over:
-        score += 1
+        if current_time - last_score_update_time >= 1000:
+            score += 1
+            last_score_update_time = current_time
         if is_jumping:
             player_rect.y += y_velocity
             y_velocity += gravity
@@ -88,8 +93,8 @@ while True:
         overlay.set_alpha(50)
         screen.blit(overlay, (0,0))
 
-        font = py.font.SysFont("malgungothic", 30)
-        text = font.render("game over, press 'R' to respawn.", True, (0,0,0))
+        re_font = py.font.SysFont("malgungothic", 30)
+        text = re_font.render("game over, press 'R' to respawn.", True, (0,0,0))
         screen.blit(text, (100,130))
 
     py.display.flip()
