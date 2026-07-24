@@ -9,9 +9,9 @@ clock=py.time.Clock()
 dino_image = None
 cactus_image = None
 try:
-    dino_image = py.image.load(".\img\dinosaur.png")
+    dino_image = py.image.load(".\dinosaur.png")
     dino_image = py.transform.scale(dino_image, (100,90))
-    cactus_image = py.image.load(".\img\cactus.png")
+    cactus_image = py.image.load(".\cactus.png")
     cactus_image = py.transform.scale(cactus_image, (105,110))
 except:
     print("이미지 파일을 찾을 수 없습니다! 기본 사각형으로 대체하여 게임을 시작합니다.")
